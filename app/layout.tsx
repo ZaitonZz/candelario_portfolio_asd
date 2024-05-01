@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Zen_Dots } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter_init = Inter({ 
+  subsets: ["latin"],
+  variable: '--font-inter'
+});
+
+const zen_dots_init = Zen_Dots({ 
+  subsets: ["latin"],
+  weight: "400",
+  variable: '--font-zen-dots'
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter_init.variable} ${zen_dots_init.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="system">{children}</ThemeProvider>
         </body>
     </html>
