@@ -19,7 +19,7 @@ import Link from 'next/link'
 function SideBarSocials() {
     return (
         <aside>
-            <nav className="grid gap-6 p-2 mt-40">
+            <nav className="grid gap-6 p-2 md:mt-10 lg:mt-60">
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger asChild>

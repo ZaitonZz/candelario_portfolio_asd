@@ -9,7 +9,7 @@ function Nav() {
   return (
     <header>
         <nav className='flex items-center'>
-            <div className='md:w-[100vh] lg:w-[150vh]'>
+            <div className='md:w-1/6 lg:1/3 2xl:w-1/2 w-screen flex justify-center md:block'>
             <a 
                     href='' 
                     className='pointer-events-none flex place-items-center gap-2 p-4'
@@ -25,7 +25,7 @@ function Nav() {
                   />
                     </a>
             </div>
-            <ul className='flex items-center justify-between'>
+            <ul className='items-center justify-between hidden md:flex md:w-5/6'>
                 <li>
                     
                 </li>
@@ -33,8 +33,8 @@ function Nav() {
                 <Button asChild
                                 variant="ghost"
                                 size="icon"
-                                className="rounded-md w-24 mx-2"
-                                aria-label="Playground"
+                                className="rounded-md w-16 lg:w-24"
+                                aria-label="Home"
                             >
                                 <Link href='http://localhost:3000/home' 
                     className='flex place-items-center gap-2 p-4 zen_dots'
@@ -48,10 +48,52 @@ function Nav() {
                 <Button asChild
                                 variant="ghost"
                                 size="icon"
-                                className="rounded-md w-30 mx-2"
+                                className="rounded-md w-16 lg:w-24"
+                                aria-label="About"
+                            >
+                    <Link href='http://localhost:3000/home#secondFrameContent' 
+                    className='flex place-items-center gap-2 p-4 zen_dots'
+                    rel='noopener noreferrer'>
+                        About
+                    </Link>
+                    </Button>
+                </li>
+                <li>
+                <Button asChild
+                                variant="ghost"
+                                size="icon"
+                                className="rounded-md w-16 lg:w-24"
                                 aria-label="Playground"
                             >
-                    <Link href='http://localhost:3000/portfolio' 
+                    <Link href='http://localhost:3000/home#thirdFrame' 
+                    className='flex place-items-center gap-2 p-4 zen_dots'
+                    rel='noopener noreferrer'>
+                        Skills
+                    </Link>
+                    </Button>
+                </li>
+                <li>
+                <Button asChild
+                                variant="ghost"
+                                size="icon"
+                                className="rounded-md w-28 lg:w-36"
+                                aria-label="Playground"
+                            >
+                    <Link href='http://localhost:3000/everything' 
+                    className='flex place-items-center gap-2 p-4 zen_dots'
+                    rel='noopener noreferrer'>
+                        Experience
+                    </Link>
+                    </Button>
+                </li>
+                <li>
+                <Button asChild
+                                variant="ghost"
+                                size="icon"
+                                className="rounded-md w-28 lg:w-36"
+                                aria-label="Playground"
+                            >
+                    <Link href='http://localhost:3000/everything' 
                     className='flex place-items-center gap-2 p-4 zen_dots'
                     rel='noopener noreferrer'>
                         Portfolio
@@ -62,21 +104,7 @@ function Nav() {
                 <Button asChild
                                 variant="ghost"
                                 size="icon"
-                                className="rounded-md w-32 h-14 mx-2"
-                                aria-label="Playground"
-                            >
-                    <Link href='http://localhost:3000/everything' 
-                    className='flex place-items-center gap-2 p-4 zen_dots'
-                    rel='noopener noreferrer'>
-                        Everything<br></br>About Me
-                    </Link>
-                    </Button>
-                </li>
-                <li>
-                <Button asChild
-                                variant="ghost"
-                                size="icon"
-                                className="rounded-md w-24 mx-2"
+                                className="rounded-md w-16 lg:w-24"
                                 aria-label="Playground"
                             >
                     <Link href='http://localhost:3000/login' 
@@ -86,7 +114,7 @@ function Nav() {
                     </Link>
                     </Button>
                 </li>
-                <li className='p-4'>
+                <li className=' '>
                     <ModeToggle></ModeToggle>
                 </li>
             </ul>
