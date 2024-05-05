@@ -1,11 +1,34 @@
 import React from "react";
-import Nav from "../components/navBar";
+import Nav from "../components/nav-bar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import SideBarSocials from "../components/sidebar";
 import Link from "next/link";
 import { DownloadIcon } from "lucide-react";
 import ScrollToTopButton from "../components/scrollToTopButton";
+import {
+  FaAndroid,
+  FaHtml5,
+  FaJava,
+  FaLaravel,
+  FaPython,
+  FaReact,
+} from "react-icons/fa";
+import {
+  SiCss3,
+  SiFlutter,
+  SiJavascript,
+  SiKotlin,
+  SiPrisma,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
+import { BsFiletypeXml } from "react-icons/bs";
+import { Badge } from "@/components/ui/badge";
+import { DiMysql } from "react-icons/di";
+import { RiNextjsFill } from "react-icons/ri";
+import { GiGraduateCap } from "react-icons/gi";
+import {EducationAccordion, WorkAccordion} from "../components/custom-accordion";
 
 function Homepage() {
   return (
@@ -26,14 +49,14 @@ function Homepage() {
             <h1 className="text-3xl lg:text-6xl font-bold text-center pt-4 lg:pt-10 zen_dots text-primary">
               I am Philip
             </h1>
-            <p className="text-m lg:text-2xl text-center pt-4">
+            <p className="text-m lg:text-2xl text-center pt-4 text-muted-foreground">
               Software Developer
             </p>
           </section>
         </section>
         <section className="flex lg:items-center justify-center w-5/6 md:w-8/12 lg:w-5/12 mt-10">
           <section className="border-primary border-2 rounded-3xl p-10 h-auto">
-            <p className="text-xl w-11/12 lg:text-2xl">
+            <p className="text-xl w-11/12 lg:text-2xl font-light">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -43,14 +66,23 @@ function Homepage() {
           </section>
         </section>
       </div>
-      <div className="h-screen flex items-center justify-center" id="secondFrame">
-        <div className="w-full lg:w-2/3 mt-80" id="secondFrameContent">
+      <div
+        className="h-screen flex items-center justify-center"
+        id="secondFrame"
+      >
+        <div className="w-full lg:w-2/3 mt-80 lg:mt-40" id="secondFrameContent">
           <h1 className="text-bold zen_dots text-6xl text-center">About Me</h1>
           <p className="text-center text-2xl">a brief description</p>
           <div className="flex flex-wrap items-center justify-center pt-32">
-            <Image src="/about.jpg" alt={""} width={400} height={100} className="w-full p-5 md:w-5/12"></Image>
+            <Image
+              src="/about.jpg"
+              alt={""}
+              width={400}
+              height={100}
+              className="w-full p-5 md:w-5/12"
+            ></Image>
             <div className="p-5 md:pl-10 w-full md:w-1/2 mt-10">
-              <p className="text-2xl">
+              <p className="text-2xl inter-light">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
@@ -78,12 +110,147 @@ function Homepage() {
           </div>
         </div>
       </div>
-      <div className="h-screen flex items-center justify-center" id="thirdFrame">
-        <div className="thirdFrameContent">
-          <h1 className="text-bold zen_dots text-6xl text-center">Skills</h1>
+      <div
+        className="h-screen flex items-center justify-center mt-96 lg:mt-48"
+        id="thirdFrame"
+      >
+        <div id="thirdFrameContent">
+          <h1 className="text-bold zen_dots text-6xl text-center pt-64 lg:pt-0">
+            Skills
+          </h1>
           <p className="text-center text-2xl">
             My acquired skills over the years
           </p>
+          <div className="flex flex-wrap justify-center pt-32">
+            <div>
+              <div>
+                <Badge
+                  variant={"outline"}
+                  className="text-xl py-2 px-6 font-thin rounded-2xl"
+                >
+                  Backend Development
+                </Badge>
+                <div className="flex justify-center">
+                  <div>
+                    <div className="flex items-center mt-8 font-light text-xl">
+                      <FaJava className="mr-4 fill-primary" /> Java
+                    </div>
+                    <div className="flex items-center mt-2 font-light text-xl">
+                      <FaPython className="mr-4 fill-primary" /> Python
+                    </div>
+                    <div className="flex items-center mt-2 font-light text-xl">
+                      <SiKotlin className="mr-4 fill-primary" /> Kotlin
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-10">
+                <Badge
+                  variant={"outline"}
+                  className="text-xl py-2 px-6 font-thin rounded-2xl"
+                >
+                  Frontend Development
+                </Badge>
+                <div className="flex justify-center">
+                  <div>
+                    <div className="flex items-center mt-8 font-light text-xl">
+                      <FaHtml5 className="mr-4 fill-primary" /> HTML
+                    </div>
+                    <div className="flex items-center mt-2 font-light text-xl">
+                      <SiCss3 className="mr-4 fill-primary" /> CSS
+                    </div>
+                    <div className="flex items-center mt-2 font-light text-xl">
+                      <BsFiletypeXml className="mr-4 fill-primary" /> XML
+                    </div>
+                    <div className="flex items-center mt-2 font-light text-xl">
+                      <SiJavascript className="mr-4 fill-primary" /> JS
+                    </div>
+                    <div className="flex items-center mt-2 font-light text-xl">
+                      <SiTypescript className="mr-4 fill-primary" /> TS
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-10 md:mt-0 md:ml-20">
+              <div>
+                <Badge
+                  variant={"outline"}
+                  className="text-xl py-2 px-12 font-thin rounded-2xl"
+                >
+                  Database Design
+                </Badge>
+                <div className="flex justify-center">
+                  <div>
+                    <div className="flex items-center mt-8 font-light text-xl">
+                      <DiMysql className="mr-4 fill-primary" /> MySQL
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-10">
+                <Badge
+                  variant={"outline"}
+                  className="text-xl py-2 px-16 font-thin rounded-2xl"
+                >
+                  Frameworks
+                </Badge>
+                <div className="flex justify-center">
+                  <div>
+                    <div className="flex items-center mt-8 font-light text-xl">
+                      <RiNextjsFill className="mr-4 fill-primary" /> NextJS
+                    </div>
+                    <div className="flex items-center mt-2 font-light text-xl">
+                      <FaAndroid className="mr-4 fill-primary" /> Android
+                    </div>
+                    <div className="flex items-center mt-2 font-light text-xl">
+                      <SiFlutter className="mr-4 fill-primary" /> Flutter
+                    </div>
+                    <div className="flex items-center mt-2 font-light text-xl">
+                      <FaLaravel className="mr-4 fill-primary" /> Laravel
+                    </div>
+                    <div className="flex items-center mt-2 font-light text-xl">
+                      <SiPrisma className="mr-4 fill-primary" /> Prisma
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-10">
+                <Badge
+                  variant={"outline"}
+                  className="text-xl py-2 px-20 font-thin"
+                >
+                  Libraries
+                </Badge>
+                <div className="flex justify-center">
+                  <div>
+                    <div className="flex items-center mt-8 font-light text-xl">
+                      <SiTailwindcss className="mr-4 fill-primary" /> Tailwind
+                    </div>
+                    <div className="flex items-center mt-2 font-light text-xl">
+                      <FaReact className="mr-4 fill-primary" /> React
+                    </div>
+                    <div className="flex items-center mt-2 font-light text-xl">
+                      <FaJava className="mr-4 fill-primary" /> JavaFx
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="h-screen flex items-center justify-center mt-96 lg:mt-48"
+        id="fourthFrame"
+      >
+        <div id="fourthFrameContent">
+          <h1 className="text-bold zen_dots text-6xl text-center pt-64 lg:pt-0">
+            Experience
+          </h1>
+          <p className="text-center text-2xl">Where I currently stand</p>
+          <EducationAccordion></EducationAccordion>
+          <WorkAccordion></WorkAccordion>
         </div>
       </div>
     </div>

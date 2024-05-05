@@ -65,7 +65,7 @@ function Nav() {
                                 className="rounded-md w-16 lg:w-24"
                                 aria-label="Playground"
                             >
-                    <Link href='http://localhost:3000/home#thirdFrame' 
+                    <Link href='http://localhost:3000/home#thirdFrameContent' 
                     className='flex place-items-center gap-2 p-4 zen_dots'
                     rel='noopener noreferrer'>
                         Skills
@@ -79,7 +79,7 @@ function Nav() {
                                 className="rounded-md w-28 lg:w-36"
                                 aria-label="Playground"
                             >
-                    <Link href='http://localhost:3000/everything' 
+                    <Link href='http://localhost:3000/home#fourthFrameContent' 
                     className='flex place-items-center gap-2 p-4 zen_dots'
                     rel='noopener noreferrer'>
                         Experience
