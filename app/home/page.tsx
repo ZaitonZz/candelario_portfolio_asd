@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import SideBarSocials from "../components/sidebar";
 import Link from "next/link";
-import { DownloadIcon } from "lucide-react";
+import { Archive, BriefcaseBusiness, DownloadIcon, Github, Hospital, Megaphone, PaletteIcon, PresentationIcon, ScrollText, StoreIcon, Wheat } from "lucide-react";
 import ScrollToTopButton from "../components/scrollToTopButton";
 import {
   FaAndroid,
@@ -27,8 +27,9 @@ import { BsFiletypeXml } from "react-icons/bs";
 import { Badge } from "@/components/ui/badge";
 import { DiMysql } from "react-icons/di";
 import { RiNextjsFill } from "react-icons/ri";
-import { GiGraduateCap } from "react-icons/gi";
-import {EducationAccordion, WorkAccordion} from "../components/custom-accordion";
+import { EducationAccordion, WorkAccordion } from "../components/custom-accordion";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import ContactForm from "../components/contact";
 
 function Homepage() {
   return (
@@ -57,12 +58,14 @@ function Homepage() {
         <section className="flex lg:items-center justify-center w-5/6 md:w-8/12 lg:w-5/12 mt-10">
           <section className="border-primary border-2 rounded-3xl p-10 h-auto">
             <p className="text-xl w-11/12 lg:text-2xl font-light">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              Meet the keyboard wielder, a fearless IT student whose code spells doom for bugs and 
+              glitches alike. Armed with a laptop as their trusty sword, they delve into digital labyrinths 
+              not just to solve problems but to craft new worlds. In the realm where binary reigns supreme, 
+              they are both the architect and the adventurer, always one click away from the next big solution.
             </p>
-            <Button className="mt-10 text-xl py-6 px-10">Contact Me</Button>
+            <Button className="mt-10 text-xl py-6 px-10" asChild>
+              <Link href={"/home#sixthFrameContent"}>Contact Me</Link>
+            </Button>
           </section>
         </section>
       </div>
@@ -72,7 +75,7 @@ function Homepage() {
       >
         <div className="w-full lg:w-2/3 mt-80 lg:mt-40" id="secondFrameContent">
           <h1 className="text-bold zen_dots text-6xl text-center">About Me</h1>
-          <p className="text-center text-2xl">a brief description</p>
+          <p className="text-center text-2xl">Who I am</p>
           <div className="flex flex-wrap items-center justify-center pt-32">
             <Image
               src="/about.jpg"
@@ -83,8 +86,8 @@ function Homepage() {
             ></Image>
             <div className="p-5 md:pl-10 w-full md:w-1/2 mt-10">
               <p className="text-2xl inter-light">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                I'm an IT enthusiast whose passion for technology drives me to turn 
+                complex problems into elegant, efficient solutions.
               </p>
               <div className="flex text-center justify-between pt-4">
                 <p>
@@ -102,7 +105,7 @@ function Homepage() {
               </div>
               <div className="w-[100%] flex items-center justify-center pt-4">
                 <Button className="p-6">
-                  <Link href={""}>Download CV</Link>
+                  <Link download href="./Candelario_CV.pdf" >Download CV</Link>
                   <DownloadIcon className="ml-4"></DownloadIcon>
                 </Button>
               </div>
@@ -119,7 +122,7 @@ function Homepage() {
             Skills
           </h1>
           <p className="text-center text-2xl">
-            My acquired skills over the years
+            What I have honed
           </p>
           <div className="flex flex-wrap justify-center pt-32">
             <div>
@@ -245,12 +248,145 @@ function Homepage() {
         id="fourthFrame"
       >
         <div id="fourthFrameContent">
-          <h1 className="text-bold zen_dots text-6xl text-center pt-64 lg:pt-0">
+          <h1 className="text-bold zen_dots text-4xl md:text-6xl text-center pt-64 lg:pt-24">
             Experience
           </h1>
           <p className="text-center text-2xl">Where I currently stand</p>
           <EducationAccordion></EducationAccordion>
           <WorkAccordion></WorkAccordion>
+        </div>
+      </div>
+      <div
+        className="h-screen flex items-center justify-center mt-96 lg:mt-72"
+        id="fifthFrame"
+      >
+        <div id="fifthFrameContent">
+          <h1 className="text-bold zen_dots text-4xl md:text-6xl text-center pt-64 lg:pt-24">
+            Portfolio
+          </h1>
+          <p className="text-center text-2xl">What I have done so far</p>
+          {/* Icon Blocks */}
+          <div className="container py-24 lg:py-32">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 md:gap-10">
+              {/* Card */}
+              <Card className="h-80 md:h-72 xl:h-64">
+                <CardHeader className="pb-4 flex-row items-center gap-4">
+                  <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
+                    <Megaphone className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <CardTitle>Talasalitaan</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div>
+                    It is a mobile application designed to teach the different dialects of Mindanao in a gamified dictionary
+                    <div className="pt-2">
+                      <Link href={"https://github.com/ZaitonZz/Group14_Capstone"}><Github className="stroke-primary"></Github></Link>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              {/* End Card */}
+              {/* Card */}
+              <Card className="h-80 md:h-72 xl:h-64">
+                <CardHeader className="pb-4 flex-row items-center gap-4">
+                  <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
+                    <Wheat className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <CardTitle>Food Vault</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div>
+                    It is a mobile application designed to be a repository of recipes around the world complete with dietary information, calorie count, and recipe builder.
+                    <div className="pt-2">
+                      <Link href={"https://github.com/ZaitonZz/FoodVault"}><Github className="stroke-primary"></Github></Link>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              {/* End Card */}
+              {/* Card */}
+              <Card className="h-80 md:h-72 xl:h-64">
+                <CardHeader className="pb-4 flex-row items-center gap-4">
+                  <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
+                    <BriefcaseBusiness className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <CardTitle>Portfolio (Flutter)</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div>
+                    It is my portfolio created using the Flutter Framework during my training in DICT.
+                    <div className="pt-2">
+                      <Link href={"https://github.com/ZaitonZz/candelario_portfolio"}><Github className="stroke-primary"></Github></Link>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              {/* End Card */}
+              {/* Card */}
+              <Card className="h-80 md:h-72 xl:h-64">
+                <CardHeader className="pb-4 flex-row items-center gap-4">
+                  <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
+                    <ScrollText className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <CardTitle>Sage Sayings</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div>
+                    It is a mobile application designed to showcase the book of Proverbs using linkedlists.
+                    <div className="pt-2">
+                      <Link href={"https://github.com/ZaitonZz/SageSayings"}><Github className="stroke-primary"></Github></Link>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              {/* End Card */}
+              {/* Card */}
+              <Card className="h-80 md:h-72 xl:h-64">
+                <CardHeader className="pb-4 flex-row items-center gap-4">
+                  <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
+                    <Hospital className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <CardTitle>RMCI-RHM Website</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div>
+                    It is a website commission to be designed for the Rivera Heart and Metabolism Center, an office of the Rivera Medical Center Inc.
+                    <div className="pt-2">
+                      <Link href={"https://github.com/ZaitonZz/RMCI-Website"}><Github className="stroke-primary"></Github></Link>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              {/* End Card */}
+              {/* Card */}
+              <Card className="h-80 md:h-72 xl:h-64">
+                <CardHeader className="pb-4 flex-row items-center gap-4">
+                  <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
+                    <Archive className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <CardTitle>BRMS</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div>
+                    It is a digital platform designed to streamline processes for local government units at the barangay level in the Philippines.
+                    <div className="pt-2">
+                      <Link href={"https://github.com/ZaitonZz/Group14_Capstone"}><Github className="stroke-primary"></Github></Link>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              {/* End Card */}
+            </div>
+          </div>
+          {/* End Icon Blocks */}
+        </div>
+      </div>
+      <div
+        className="h-screen flex items-center justify-center mt-96 lg:mt-48 pt-96 md:pt-0"
+        id="sixthFrame"
+      >
+        <div id="sixthFrameContent">
+          <ContactForm></ContactForm>
         </div>
       </div>
     </div>
