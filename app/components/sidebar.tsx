@@ -1,124 +1,69 @@
-'use client'
-import React from 'react'
+"use client";
+import React from "react";
+import { Github, Twitter, Facebook, Instagram, Linkedin } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
-    Github,
-    Twitter,
-    Facebook,
-    Instagram,
-    Linkedin
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { TooltipProvider } from '@radix-ui/react-tooltip'
-import Link from 'next/link'
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
+import Link from "next/link";
+import { Social } from "../types/api/social";
 
-function SideBarSocials() {
-    return (
-        <aside>
-            <nav className="grid gap-6 p-2 md:mt-10 lg:mt-60">
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button asChild
-                                variant="ghost"
-                                size="icon"
-                                className="rounded-lg"
-                                aria-label="Facebook"
-                            >
-                                <Link href="https://web.facebook.com/philip.candelario.3/">
-                                    <Facebook className="size-5 stroke-primary dark:stroke-foreground" />
-                                </Link>
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="right" sideOffset={5}>
-                            Facebook
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button asChild
-                                variant="ghost"
-                                size="icon"
-                                className="rounded-lg"
-                                aria-label="Instagram"
-                            >
-                                <Link href="https://www.instagram.com/zaiton.with.the.zz/">
-                                    <Instagram className="size-5 stroke-primary dark:stroke-foreground" />
-                                </Link>
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="right" sideOffset={5}>
-                            Instagram
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
+async function SideBarSocials() {
+  const socialsReponse = await fetch("http://127.0.0.1:8000/api/socials", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
 
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="rounded-lg"
-                                aria-label="Twitter"
-                            >
-                                <Link href="https://twitter.com/_ZaitonZz">
-                                    <Twitter className="size-5 stroke-primary dark:stroke-foreground" />
-                                </Link>
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="right" sideOffset={5}>
-                            Twitter
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="rounded-lg"
-                                aria-label="Github"
-                            >
-                                <Link href="https://github.com/ZaitonZz">
-                                    <Github className="size-5 stroke-primary dark:stroke-foreground" />
-                                </Link>
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="right" sideOffset={5}>
-                            Github
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="rounded-lg"
-                                aria-label="LinkedIn"
-                            >
-                                <Link href="https://www.linkedin.com/in/philip-greg-candelario-b8b195212/">
-                                    <Linkedin className="size-5 stroke-primary dark:stroke-foreground" />
-                                </Link>
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="right" sideOffset={5}>
-                            LinkedIn
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-            </nav>
-        </aside>
-    )
+  const socials: Social[] = await socialsReponse.json();
+
+  return (
+    <aside>
+      <nav className="grid gap-6 p-2 md:mt-10 lg:mt-60">
+        <TooltipProvider>
+          {socials.map((social) => (
+            <Tooltip key={social.name}>
+              <TooltipTrigger asChild>
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-lg"
+                  aria-label={social.name}
+                >
+                  <Link href={social.link}>
+                    {social.name === "Facebook" && (
+                      <Facebook className="size-5 stroke-primary dark:stroke-foreground" />
+                    )}
+                    {social.name === "Instagram" && (
+                      <Instagram className="size-5 stroke-primary dark:stroke-foreground" />
+                    )}
+                    {social.name === "Twitter" && (
+                      <Twitter className="size-5 stroke-primary dark:stroke-foreground" />
+                    )}
+                    {social.name === "Github" && (
+                      <Github className="size-5 stroke-primary dark:stroke-foreground" />
+                    )}
+                    {social.name === "LinkedIn" && (
+                      <Linkedin className="size-5 stroke-primary dark:stroke-foreground" />
+                    )}
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="right" sideOffset={5}>
+                {social.name}
+              </TooltipContent>
+            </Tooltip>
+          ))}
+        </TooltipProvider>
+      </nav>
+    </aside>
+  );
 }
 
-export default SideBarSocials
+export default SideBarSocials;
