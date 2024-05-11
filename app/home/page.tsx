@@ -4,27 +4,21 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import SideBarSocials from "../components/sidebar";
 import Link from "next/link";
-import {
-  Archive,
-  BriefcaseBusiness,
-  DownloadIcon,
-  Github,
-  Hospital,
-  Megaphone,
-  PaletteIcon,
-  PresentationIcon,
-  ScrollText,
-  StoreIcon,
-  Wheat,
-} from "lucide-react";
 import ScrollToTopButton from "../components/scrollToTopButton";
 import {
   FaAndroid,
+  FaArchive,
+  FaBriefcase,
+  FaCarrot,
+  FaDownload,
+  FaGithub,
+  FaHospital,
   FaHtml5,
   FaJava,
   FaLaravel,
   FaPython,
   FaReact,
+  FaScroll,
 } from "react-icons/fa";
 import {
   SiCss3,
@@ -38,7 +32,7 @@ import {
 import { BsFiletypeXml } from "react-icons/bs";
 import { Badge } from "@/components/ui/badge";
 import { DiMysql } from "react-icons/di";
-import { RiNextjsFill } from "react-icons/ri";
+import { RiMegaphoneLine, RiNextjsFill } from "react-icons/ri";
 import {
   EducationAccordion,
   WorkAccordion,
@@ -46,6 +40,8 @@ import {
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import ContactForm from "../components/contact";
 import { Home } from "../types/api/home";
+import { About } from "../types/api/about";
+import DynamicComponent from "../components/dynamic-component";
 
 
 async function Homepage() {
@@ -56,19 +52,29 @@ async function Homepage() {
     },
     cache: "no-store",
   });
+  
+  const aboutResponse = await fetch("http://127.0.0.1:8000/api/about", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
 
   const homeData: Home = await homeResponse.json();
-
+  const aboutData: About = await aboutResponse.json();
+  console.log(aboutData);
   return (
     <div className="h-screen lg:pl-12 lg:pr-12 pb-6">
       <Nav></Nav>
+      <DynamicComponent iconName="FaGithub" className="fill-primary size-10"></DynamicComponent>
       <ScrollToTopButton></ScrollToTopButton>
       <div className="firstFrame flex h-screen flex-wrap justify-center w-full">
         <SideBarSocials></SideBarSocials>
         <section className="w-1/2 md:w-10/12 lg:w-1/3 flex items-center justify-center ml-6 md:ml-1 md:mr-12 lg:ml-10">
           <section>
             <Image
-              src={`/${homeData.photo}`}
+              src={`${homeData.photo}`}
               alt={""}
               width={350}
               height={300}
@@ -98,11 +104,11 @@ async function Homepage() {
         id="secondFrame"
       >
         <div className="w-full lg:w-2/3 mt-80 lg:mt-40" id="secondFrameContent">
-          <h1 className="text-bold zen_dots text-6xl text-center">About Me</h1>
-          <p className="text-center text-2xl">Who I am</p>
+          <h1 className="text-bold zen_dots text-6xl text-center">{aboutData.title}</h1>
+          <p className="text-center text-2xl">{aboutData.subtitle}</p>
           <div className="flex flex-wrap items-center justify-center pt-32">
             <Image
-              src="/about.jpg"
+              src={`${aboutData.photo}`}
               alt={""}
               width={400}
               height={100}
@@ -110,29 +116,28 @@ async function Homepage() {
             ></Image>
             <div className="p-5 md:pl-10 w-full md:w-1/2 mt-10">
               <p className="text-2xl inter-light">
-                I'm an IT enthusiast whose passion for technology drives me to
-                turn complex problems into elegant, efficient solutions.
+                {aboutData.description}
               </p>
               <div className="flex text-center justify-between pt-4">
                 <p>
-                  <span className="text-4xl font-bold zen_dots">3+</span>
-                  <br></br>Years of Experience
+                  <span className="text-4xl font-bold zen_dots">{aboutData.years_number}</span>
+                  <br></br>{aboutData.years_text}
                 </p>
                 <p>
-                  <span className="text-4xl font-bold zen_dots">10+</span>
-                  <br></br>Software Projects
+                  <span className="text-4xl font-bold zen_dots">{aboutData.projects_number}</span>
+                  <br></br>{aboutData.projects_text}
                 </p>
                 <p>
-                  <span className="text-4xl font-bold zen_dots">5+</span>
-                  <br></br>Languages & Frameworks
+                  <span className="text-4xl font-bold zen_dots">{aboutData.frameworks_number}</span>
+                  <br></br>{aboutData.frameworks_text}
                 </p>
               </div>
               <div className="w-[100%] flex items-center justify-center pt-4">
                 <Button className="p-6">
-                  <Link download href="./Candelario_CV.pdf">
-                    Download CV
+                  <Link download href={`${aboutData.button_link}`}>
+                    {aboutData.button_text}
                   </Link>
-                  <DownloadIcon className="ml-4"></DownloadIcon>
+                  <FaDownload className="ml-4"/>
                 </Button>
               </div>
             </div>
@@ -296,7 +301,7 @@ async function Homepage() {
               <Card className="h-80 md:h-72 xl:h-64">
                 <CardHeader className="pb-4 flex-row items-center gap-4">
                   <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
-                    <Megaphone className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
+                    <RiMegaphoneLine className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
                   </div>
                   <CardTitle>Talasalitaan</CardTitle>
                 </CardHeader>
@@ -308,7 +313,7 @@ async function Homepage() {
                       <Link
                         href={"https://github.com/ZaitonZz/Group14_Capstone"}
                       >
-                        <Github className="stroke-primary"></Github>
+                        <FaGithub className="size-5 lg:size-8"/>
                       </Link>
                     </div>
                   </div>
@@ -319,7 +324,7 @@ async function Homepage() {
               <Card className="h-80 md:h-72 xl:h-64">
                 <CardHeader className="pb-4 flex-row items-center gap-4">
                   <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
-                    <Wheat className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
+                    <FaCarrot className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
                   </div>
                   <CardTitle>Food Vault</CardTitle>
                 </CardHeader>
@@ -330,7 +335,7 @@ async function Homepage() {
                     calorie count, and recipe builder.
                     <div className="pt-2">
                       <Link href={"https://github.com/ZaitonZz/FoodVault"}>
-                        <Github className="stroke-primary"></Github>
+                        <FaGithub className="size-5 lg:size-8"></FaGithub>
                       </Link>
                     </div>
                   </div>
@@ -341,7 +346,7 @@ async function Homepage() {
               <Card className="h-80 md:h-72 xl:h-64">
                 <CardHeader className="pb-4 flex-row items-center gap-4">
                   <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
-                    <BriefcaseBusiness className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
+                    <FaBriefcase className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
                   </div>
                   <CardTitle>Portfolio (Flutter)</CardTitle>
                 </CardHeader>
@@ -355,7 +360,7 @@ async function Homepage() {
                           "https://github.com/ZaitonZz/candelario_portfolio"
                         }
                       >
-                        <Github className="stroke-primary"></Github>
+                        <FaGithub className="size-5 lg:size-8"/>
                       </Link>
                     </div>
                   </div>
@@ -366,7 +371,7 @@ async function Homepage() {
               <Card className="h-80 md:h-72 xl:h-64">
                 <CardHeader className="pb-4 flex-row items-center gap-4">
                   <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
-                    <ScrollText className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
+                    <FaScroll className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
                   </div>
                   <CardTitle>Sage Sayings</CardTitle>
                 </CardHeader>
@@ -376,7 +381,7 @@ async function Homepage() {
                     Proverbs using linkedlists.
                     <div className="pt-2">
                       <Link href={"https://github.com/ZaitonZz/SageSayings"}>
-                        <Github className="stroke-primary"></Github>
+                        <FaGithub className="size-5 lg:size-8"/>                      
                       </Link>
                     </div>
                   </div>
@@ -387,7 +392,7 @@ async function Homepage() {
               <Card className="h-80 md:h-72 xl:h-64">
                 <CardHeader className="pb-4 flex-row items-center gap-4">
                   <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
-                    <Hospital className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
+                    <FaHospital className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
                   </div>
                   <CardTitle>RMCI-RHM Website</CardTitle>
                 </CardHeader>
@@ -398,7 +403,7 @@ async function Homepage() {
                     Center Inc.
                     <div className="pt-2">
                       <Link href={"https://github.com/ZaitonZz/RMCI-Website"}>
-                        <Github className="stroke-primary"></Github>
+                        <FaGithub className="size-5 lg:size-8"/>
                       </Link>
                     </div>
                   </div>
@@ -409,7 +414,7 @@ async function Homepage() {
               <Card className="h-80 md:h-72 xl:h-64">
                 <CardHeader className="pb-4 flex-row items-center gap-4">
                   <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
-                    <Archive className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
+                    <FaArchive className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
                   </div>
                   <CardTitle>BRMS</CardTitle>
                 </CardHeader>
@@ -422,7 +427,7 @@ async function Homepage() {
                       <Link
                         href={"https://github.com/ZaitonZz/Group14_Capstone"}
                       >
-                        <Github className="stroke-primary"></Github>
+                        <FaGithub className="size-5 lg:size-8"/>
                       </Link>
                     </div>
                   </div>
