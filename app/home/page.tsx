@@ -42,6 +42,8 @@ import ContactForm from "../components/contact";
 import { Home } from "../types/api/home";
 import { About } from "../types/api/about";
 import DynamicComponent from "../components/dynamic-component";
+import SkillsBlock from "../components/skills-block";
+import { Skill } from "../types/api/skill";
 
 
 async function Homepage() {
@@ -52,8 +54,15 @@ async function Homepage() {
     },
     cache: "no-store",
   });
-  
+
   const aboutResponse = await fetch("http://127.0.0.1:8000/api/about", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
+  const skillResponse = await fetch("http://127.0.0.1:8000/api/skills", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -63,11 +72,11 @@ async function Homepage() {
 
   const homeData: Home = await homeResponse.json();
   const aboutData: About = await aboutResponse.json();
-  console.log(aboutData);
+  const skillData: Skill = await skillResponse.json();
+
   return (
     <div className="h-screen lg:pl-12 lg:pr-12 pb-6">
       <Nav></Nav>
-      <DynamicComponent iconName="FaGithub" className="fill-primary size-10"></DynamicComponent>
       <ScrollToTopButton></ScrollToTopButton>
       <div className="firstFrame flex h-screen flex-wrap justify-center w-full">
         <SideBarSocials></SideBarSocials>
@@ -137,7 +146,7 @@ async function Homepage() {
                   <Link download href={`${aboutData.button_link}`}>
                     {aboutData.button_text}
                   </Link>
-                  <FaDownload className="ml-4"/>
+                  <FaDownload className="ml-4" />
                 </Button>
               </div>
             </div>
@@ -150,9 +159,9 @@ async function Homepage() {
       >
         <div id="thirdFrameContent">
           <h1 className="text-bold zen_dots text-6xl text-center pt-64 lg:pt-0">
-            Skills
+            {skillData.title}
           </h1>
-          <p className="text-center text-2xl">What I have honed</p>
+          <p className="text-center text-2xl">{skillData.subtitle}</p>
           <div className="flex flex-wrap justify-center pt-32">
             <div>
               <div>
@@ -160,19 +169,11 @@ async function Homepage() {
                   variant={"outline"}
                   className="text-xl py-2 px-6 font-thin rounded-2xl"
                 >
-                  Backend Development
+                  {skillData.section_one}
                 </Badge>
                 <div className="flex justify-center">
                   <div>
-                    <div className="flex items-center mt-8 font-light text-xl">
-                      <FaJava className="mr-4 fill-primary" /> Java
-                    </div>
-                    <div className="flex items-center mt-2 font-light text-xl">
-                      <FaPython className="mr-4 fill-primary" /> Python
-                    </div>
-                    <div className="flex items-center mt-2 font-light text-xl">
-                      <SiKotlin className="mr-4 fill-primary" /> Kotlin
-                    </div>
+                    <SkillsBlock tableNum={1} />
                   </div>
                 </div>
               </div>
@@ -181,25 +182,11 @@ async function Homepage() {
                   variant={"outline"}
                   className="text-xl py-2 px-6 font-thin rounded-2xl"
                 >
-                  Frontend Development
+                  {skillData.section_two}
                 </Badge>
                 <div className="flex justify-center">
                   <div>
-                    <div className="flex items-center mt-8 font-light text-xl">
-                      <FaHtml5 className="mr-4 fill-primary" /> HTML
-                    </div>
-                    <div className="flex items-center mt-2 font-light text-xl">
-                      <SiCss3 className="mr-4 fill-primary" /> CSS
-                    </div>
-                    <div className="flex items-center mt-2 font-light text-xl">
-                      <BsFiletypeXml className="mr-4 fill-primary" /> XML
-                    </div>
-                    <div className="flex items-center mt-2 font-light text-xl">
-                      <SiJavascript className="mr-4 fill-primary" /> JS
-                    </div>
-                    <div className="flex items-center mt-2 font-light text-xl">
-                      <SiTypescript className="mr-4 fill-primary" /> TS
-                    </div>
+                  <SkillsBlock tableNum={2} />
                   </div>
                 </div>
               </div>
@@ -210,13 +197,11 @@ async function Homepage() {
                   variant={"outline"}
                   className="text-xl py-2 px-12 font-thin rounded-2xl"
                 >
-                  Database Design
+                  {skillData.section_three}
                 </Badge>
                 <div className="flex justify-center">
                   <div>
-                    <div className="flex items-center mt-8 font-light text-xl">
-                      <DiMysql className="mr-4 fill-primary" /> MySQL
-                    </div>
+                  <SkillsBlock tableNum={3} />
                   </div>
                 </div>
               </div>
@@ -225,25 +210,11 @@ async function Homepage() {
                   variant={"outline"}
                   className="text-xl py-2 px-16 font-thin rounded-2xl"
                 >
-                  Frameworks
+                  {skillData.section_four}
                 </Badge>
                 <div className="flex justify-center">
                   <div>
-                    <div className="flex items-center mt-8 font-light text-xl">
-                      <RiNextjsFill className="mr-4 fill-primary" /> NextJS
-                    </div>
-                    <div className="flex items-center mt-2 font-light text-xl">
-                      <FaAndroid className="mr-4 fill-primary" /> Android
-                    </div>
-                    <div className="flex items-center mt-2 font-light text-xl">
-                      <SiFlutter className="mr-4 fill-primary" /> Flutter
-                    </div>
-                    <div className="flex items-center mt-2 font-light text-xl">
-                      <FaLaravel className="mr-4 fill-primary" /> Laravel
-                    </div>
-                    <div className="flex items-center mt-2 font-light text-xl">
-                      <SiPrisma className="mr-4 fill-primary" /> Prisma
-                    </div>
+                  <SkillsBlock tableNum={4} />
                   </div>
                 </div>
               </div>
@@ -252,19 +223,11 @@ async function Homepage() {
                   variant={"outline"}
                   className="text-xl py-2 px-20 font-thin"
                 >
-                  Libraries
+                  {skillData.section_five}
                 </Badge>
                 <div className="flex justify-center">
                   <div>
-                    <div className="flex items-center mt-8 font-light text-xl">
-                      <SiTailwindcss className="mr-4 fill-primary" /> Tailwind
-                    </div>
-                    <div className="flex items-center mt-2 font-light text-xl">
-                      <FaReact className="mr-4 fill-primary" /> React
-                    </div>
-                    <div className="flex items-center mt-2 font-light text-xl">
-                      <FaJava className="mr-4 fill-primary" /> JavaFx
-                    </div>
+                    <SkillsBlock tableNum={5} />
                   </div>
                 </div>
               </div>
@@ -313,7 +276,7 @@ async function Homepage() {
                       <Link
                         href={"https://github.com/ZaitonZz/Group14_Capstone"}
                       >
-                        <FaGithub className="size-5 lg:size-8"/>
+                        <FaGithub className="size-5 lg:size-8" />
                       </Link>
                     </div>
                   </div>
@@ -360,7 +323,7 @@ async function Homepage() {
                           "https://github.com/ZaitonZz/candelario_portfolio"
                         }
                       >
-                        <FaGithub className="size-5 lg:size-8"/>
+                        <FaGithub className="size-5 lg:size-8" />
                       </Link>
                     </div>
                   </div>
@@ -381,7 +344,7 @@ async function Homepage() {
                     Proverbs using linkedlists.
                     <div className="pt-2">
                       <Link href={"https://github.com/ZaitonZz/SageSayings"}>
-                        <FaGithub className="size-5 lg:size-8"/>                      
+                        <FaGithub className="size-5 lg:size-8" />
                       </Link>
                     </div>
                   </div>
@@ -403,7 +366,7 @@ async function Homepage() {
                     Center Inc.
                     <div className="pt-2">
                       <Link href={"https://github.com/ZaitonZz/RMCI-Website"}>
-                        <FaGithub className="size-5 lg:size-8"/>
+                        <FaGithub className="size-5 lg:size-8" />
                       </Link>
                     </div>
                   </div>
@@ -427,7 +390,7 @@ async function Homepage() {
                       <Link
                         href={"https://github.com/ZaitonZz/Group14_Capstone"}
                       >
-                        <FaGithub className="size-5 lg:size-8"/>
+                        <FaGithub className="size-5 lg:size-8" />
                       </Link>
                     </div>
                   </div>

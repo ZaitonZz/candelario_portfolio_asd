@@ -2,12 +2,16 @@ import React from 'react';
 import * as AiReactIcons from "react-icons/ai";
 import * as FaIcons from "react-icons/fa";
 import * as SiIcons from "react-icons/si";
+import * as BsIcons from "react-icons/bs";
+import * as RiIcons from "react-icons/ri";
 import { IconType } from "react-icons";
 
 // Define the type for all icon names
 type AiIconNames = keyof typeof AiReactIcons;
 type FaIconNames = keyof typeof FaIcons;
 type SiIconNames = keyof typeof SiIcons;
+type BsIconNames = keyof typeof BsIcons;
+type RiIconNames = keyof typeof RiIcons;
 
 // Props type
 type DynamicComponentProps = {
@@ -28,6 +32,14 @@ function DynamicComponent({ iconName, className }: DynamicComponentProps) {
         }
         if (iconName.startsWith("Si")) {
             const IconComponent = SiIcons[iconName as SiIconNames] as IconType;
+            return IconComponent || null;
+        }
+        if (iconName.startsWith("Bs")) {
+            const IconComponent = BsIcons[iconName as BsIconNames] as IconType;
+            return IconComponent || null;
+        }
+        if (iconName.startsWith("Ri")) {
+            const IconComponent = RiIcons[iconName as RiIconNames] as IconType;
             return IconComponent || null;
         }
         return null; // Return null if the icon isn't found
