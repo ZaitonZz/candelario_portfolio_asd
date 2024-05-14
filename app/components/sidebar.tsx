@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+
+import React, { useState, useEffect } from "react";
 import { Github, Twitter, Facebook, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,17 +11,19 @@ import {
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 import Link from "next/link";
 import { Social } from "../types/api/social";
+import { fetchSocials } from "../util/fetchSocials"; // Adjust the path as necessary
 
-async function SideBarSocials() {
-  const socialsReponse = await fetch("http://127.0.0.1:8000/api/socials", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    cache: "no-store",
-  });
+const SideBarSocials: React.FC = () => {
+  const [socials, setSocials] = useState<Social[]>([]);
 
-  const socials: Social[] = await socialsReponse.json();
+  useEffect(() => {
+    async function getSocials() {
+      const fetchedSocials = await fetchSocials();
+      setSocials(fetchedSocials);
+    }
+
+    getSocials();
+  }, []);
 
   return (
     <aside>
@@ -64,6 +67,6 @@ async function SideBarSocials() {
       </nav>
     </aside>
   );
-}
+};
 
 export default SideBarSocials;

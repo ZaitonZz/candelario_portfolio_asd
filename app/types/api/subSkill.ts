@@ -1,4 +1,4 @@
-interface subSkill {
+interface SubSkill {
     id: number;
     created_at: string | null; // Assuming dates are stored as ISO strings, nullable based on your schema
     updated_at: string | null; // Same assumption as above
@@ -9,4 +9,4 @@ interface subSkill {
 }
 
 
-export type { subSkill };
+export type { SubSkill };

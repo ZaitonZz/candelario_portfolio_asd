@@ -13,25 +13,9 @@ import {
   FaDownload,
   FaGithub,
   FaHospital,
-  FaHtml5,
-  FaJava,
-  FaLaravel,
-  FaPython,
-  FaReact,
   FaScroll,
 } from "react-icons/fa";
-import {
-  SiCss3,
-  SiFlutter,
-  SiJavascript,
-  SiKotlin,
-  SiPrisma,
-  SiTailwindcss,
-  SiTypescript,
-} from "react-icons/si";
-import { BsFiletypeXml } from "react-icons/bs";
 import { Badge } from "@/components/ui/badge";
-import { DiMysql } from "react-icons/di";
 import { RiMegaphoneLine, RiNextjsFill } from "react-icons/ri";
 import {
   EducationAccordion,
@@ -44,6 +28,8 @@ import { About } from "../types/api/about";
 import DynamicComponent from "../components/dynamic-component";
 import SkillsBlock from "../components/skills-block";
 import { Skill } from "../types/api/skill";
+import { SubSkill } from "../types/api/subSkill";
+import { fetchSkillsByTableNum } from "../util/fetchSkills";
 
 
 async function Homepage() {
@@ -73,6 +59,11 @@ async function Homepage() {
   const homeData: Home = await homeResponse.json();
   const aboutData: About = await aboutResponse.json();
   const skillData: Skill = await skillResponse.json();
+  const skillsTable1: SubSkill[] = await fetchSkillsByTableNum(1);
+  const skillsTable2: SubSkill[] = await fetchSkillsByTableNum(2);
+  const skillsTable3: SubSkill[] = await fetchSkillsByTableNum(3);
+  const skillsTable4: SubSkill[] = await fetchSkillsByTableNum(4);
+  const skillsTable5: SubSkill[] = await fetchSkillsByTableNum(5);
 
   return (
     <div className="h-screen lg:pl-12 lg:pr-12 pb-6">
@@ -173,7 +164,7 @@ async function Homepage() {
                 </Badge>
                 <div className="flex justify-center">
                   <div>
-                    <SkillsBlock tableNum={1} />
+                    <SkillsBlock skills={skillsTable1} />
                   </div>
                 </div>
               </div>
@@ -186,7 +177,7 @@ async function Homepage() {
                 </Badge>
                 <div className="flex justify-center">
                   <div>
-                  <SkillsBlock tableNum={2} />
+                  <SkillsBlock skills={skillsTable2} />
                   </div>
                 </div>
               </div>
@@ -201,7 +192,7 @@ async function Homepage() {
                 </Badge>
                 <div className="flex justify-center">
                   <div>
-                  <SkillsBlock tableNum={3} />
+                  <SkillsBlock skills={skillsTable3} />
                   </div>
                 </div>
               </div>
@@ -214,7 +205,7 @@ async function Homepage() {
                 </Badge>
                 <div className="flex justify-center">
                   <div>
-                  <SkillsBlock tableNum={4} />
+                  <SkillsBlock skills={skillsTable4} />
                   </div>
                 </div>
               </div>
@@ -227,7 +218,7 @@ async function Homepage() {
                 </Badge>
                 <div className="flex justify-center">
                   <div>
-                    <SkillsBlock tableNum={5} />
+                    <SkillsBlock skills={skillsTable5} />
                   </div>
                 </div>
               </div>
@@ -236,7 +227,7 @@ async function Homepage() {
         </div>
       </div>
       <div
-        className="h-screen flex items-center justify-center mt-96 lg:mt-48"
+        className="h-screen flex items-center justify-center mt-96 lg:mt-48 pt-80"
         id="fourthFrame"
       >
         <div id="fourthFrameContent">
@@ -249,7 +240,7 @@ async function Homepage() {
         </div>
       </div>
       <div
-        className="h-screen flex items-center justify-center mt-96 lg:mt-72"
+        className="h-screen flex items-center justify-center mt-96 lg:pt-48"
         id="fifthFrame"
       >
         <div id="fifthFrameContent">
