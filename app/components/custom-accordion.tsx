@@ -12,7 +12,7 @@ import { GiGraduateCap } from 'react-icons/gi';
 import { Record } from '../types/api/record';
 import { fetchRecordsByTableNum } from '../util/fetch-records';
 
-const RecordsAccordion: React.FC<{ tableNum: number, icon: React.ReactNode, title: string }> = ({ tableNum, icon, title }) => {
+export const RecordsAccordion: React.FC<{ tableNum: number, icon: React.ReactNode, title: string }> = ({ tableNum, icon, title }) => {
   const [records, setRecords] = useState<Record[]>([]);
 
   useEffect(() => {
@@ -55,17 +55,5 @@ const RecordsAccordion: React.FC<{ tableNum: number, icon: React.ReactNode, titl
         </AccordionContent>
       </AccordionItem>
     </Accordion>
-  );
-};
-
-export const EducationAccordion: React.FC = () => {
-  return (
-    <RecordsAccordion tableNum={1} icon={<GiGraduateCap className="size-32 fill-primary" />} title="Education" />
-  );
-};
-
-export const WorkAccordion: React.FC = () => {
-  return (
-    <RecordsAccordion tableNum={2} icon={<FaBriefcase className="size-32 fill-primary" />} title="Work" />
   );
 };

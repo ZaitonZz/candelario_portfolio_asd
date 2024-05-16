@@ -17,10 +17,7 @@ import {
 } from "react-icons/fa";
 import { Badge } from "@/components/ui/badge";
 import { RiMegaphoneLine, RiNextjsFill } from "react-icons/ri";
-import {
-  EducationAccordion,
-  WorkAccordion,
-} from "../components/custom-accordion";
+import {RecordsAccordion} from "../components/custom-accordion";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import ContactForm from "../components/contact";
 import { Home } from "../types/api/home";
@@ -30,9 +27,15 @@ import SkillsBlock from "../components/skills-block";
 import { Skill } from "../types/api/skill";
 import { SubSkill } from "../types/api/subSkill";
 import { fetchSkillsByTableNum } from "../util/fetchSkills";
+import CustomCardComponent from "../components/custom-card";
+import { fetchCardByTableNum } from "../util/fetch-cards";
+import { Card as CardType } from "../types/api/card";
+import { Portfolio } from "../types/api/portfolio";
+import { Experience } from "../types/api/experience";
 
 
 async function Homepage() {
+
   const homeResponse = await fetch("http://127.0.0.1:8000/api/home", {
     method: "GET",
     headers: {
@@ -40,7 +43,6 @@ async function Homepage() {
     },
     cache: "no-store",
   });
-
   const aboutResponse = await fetch("http://127.0.0.1:8000/api/about", {
     method: "GET",
     headers: {
@@ -55,15 +57,36 @@ async function Homepage() {
     },
     cache: "no-store",
   });
+  const portfolioResponse = await fetch("http://127.0.0.1:8000/api/portfolio", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
+  const experienceResponse = await fetch("http://127.0.0.1:8000/api/experience", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
 
   const homeData: Home = await homeResponse.json();
   const aboutData: About = await aboutResponse.json();
   const skillData: Skill = await skillResponse.json();
-  const skillsTable1: SubSkill[] = await fetchSkillsByTableNum(1);
+  const portfolioData: Portfolio = await portfolioResponse.json();
+  const experienceData:Experience = await experienceResponse.json();  const skillsTable1: SubSkill[] = await fetchSkillsByTableNum(1);
   const skillsTable2: SubSkill[] = await fetchSkillsByTableNum(2);
   const skillsTable3: SubSkill[] = await fetchSkillsByTableNum(3);
   const skillsTable4: SubSkill[] = await fetchSkillsByTableNum(4);
   const skillsTable5: SubSkill[] = await fetchSkillsByTableNum(5);
+  const port_1:CardType | null = await fetchCardByTableNum(1)
+  const port_2:CardType | null = await fetchCardByTableNum(2)
+  const port_3:CardType | null = await fetchCardByTableNum(3)
+  const port_4:CardType | null = await fetchCardByTableNum(4)
+  const port_5:CardType | null = await fetchCardByTableNum(5)
+  const port_6:CardType | null = await fetchCardByTableNum(6)
 
   return (
     <div className="h-screen lg:pl-12 lg:pr-12 pb-6">
@@ -149,11 +172,11 @@ async function Homepage() {
         id="thirdFrame"
       >
         <div id="thirdFrameContent">
-          <h1 className="text-bold zen_dots text-6xl text-center pt-64 lg:pt-0">
+          <h1 className="text-bold zen_dots text-6xl text-center pt-64 lg:pt-24">
             {skillData.title}
           </h1>
           <p className="text-center text-2xl">{skillData.subtitle}</p>
-          <div className="flex flex-wrap justify-center pt-32">
+          <div className="flex flex-wrap justify-center pt-24">
             <div>
               <div>
                 <Badge
@@ -227,16 +250,16 @@ async function Homepage() {
         </div>
       </div>
       <div
-        className="h-screen flex items-center justify-center mt-96 lg:mt-48 pt-80"
+        className="h-screen flex items-center justify-center mt-96 lg:mt-48 lg:pt-80"
         id="fourthFrame"
       >
         <div id="fourthFrameContent">
           <h1 className="text-bold zen_dots text-4xl md:text-6xl text-center pt-64 lg:pt-24">
-            Experience
+            {experienceData.title}
           </h1>
-          <p className="text-center text-2xl">Where I currently stand</p>
-          <EducationAccordion></EducationAccordion>
-          <WorkAccordion></WorkAccordion>
+          <p className="text-center text-2xl">{experienceData.subtitle}</p>
+          <RecordsAccordion tableNum={1} icon={<DynamicComponent iconName={experienceData.section_one_icon} className="size-32 fill-primary" />} title={experienceData.section_one_text} />
+          <RecordsAccordion tableNum={2} icon={<DynamicComponent iconName={experienceData.section_two_icon} className="size-32 fill-primary" />} title={experienceData.section_two_text} />
         </div>
       </div>
       <div
@@ -244,150 +267,19 @@ async function Homepage() {
         id="fifthFrame"
       >
         <div id="fifthFrameContent">
-          <h1 className="text-bold zen_dots text-4xl md:text-6xl text-center pt-64 lg:pt-24">
-            Portfolio
+          <h1 className="text-bold zen_dots text-4xl md:text-6xl text-center mt-96 pt-96 lg:pt-24 lg:mt-0">
+            {portfolioData.title}
           </h1>
-          <p className="text-center text-2xl">What I have done so far</p>
+          <p className="text-center text-2xl">{portfolioData.subtitle}</p>
           {/* Icon Blocks */}
-          <div className="container py-24 lg:py-32">
+          <div className="container py-24">
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 md:gap-10">
-              {/* Card */}
-              <Card className="h-80 md:h-72 xl:h-64">
-                <CardHeader className="pb-4 flex-row items-center gap-4">
-                  <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
-                    <RiMegaphoneLine className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <CardTitle>Talasalitaan</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div>
-                    It is a mobile application designed to teach the different
-                    dialects of Mindanao in a gamified dictionary
-                    <div className="pt-2">
-                      <Link
-                        href={"https://github.com/ZaitonZz/Group14_Capstone"}
-                      >
-                        <FaGithub className="size-5 lg:size-8" />
-                      </Link>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              {/* End Card */}
-              {/* Card */}
-              <Card className="h-80 md:h-72 xl:h-64">
-                <CardHeader className="pb-4 flex-row items-center gap-4">
-                  <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
-                    <FaCarrot className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <CardTitle>Food Vault</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div>
-                    It is a mobile application designed to be a repository of
-                    recipes around the world complete with dietary information,
-                    calorie count, and recipe builder.
-                    <div className="pt-2">
-                      <Link href={"https://github.com/ZaitonZz/FoodVault"}>
-                        <FaGithub className="size-5 lg:size-8"></FaGithub>
-                      </Link>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              {/* End Card */}
-              {/* Card */}
-              <Card className="h-80 md:h-72 xl:h-64">
-                <CardHeader className="pb-4 flex-row items-center gap-4">
-                  <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
-                    <FaBriefcase className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <CardTitle>Portfolio (Flutter)</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div>
-                    It is my portfolio created using the Flutter Framework
-                    during my training in DICT.
-                    <div className="pt-2">
-                      <Link
-                        href={
-                          "https://github.com/ZaitonZz/candelario_portfolio"
-                        }
-                      >
-                        <FaGithub className="size-5 lg:size-8" />
-                      </Link>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              {/* End Card */}
-              {/* Card */}
-              <Card className="h-80 md:h-72 xl:h-64">
-                <CardHeader className="pb-4 flex-row items-center gap-4">
-                  <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
-                    <FaScroll className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <CardTitle>Sage Sayings</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div>
-                    It is a mobile application designed to showcase the book of
-                    Proverbs using linkedlists.
-                    <div className="pt-2">
-                      <Link href={"https://github.com/ZaitonZz/SageSayings"}>
-                        <FaGithub className="size-5 lg:size-8" />
-                      </Link>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              {/* End Card */}
-              {/* Card */}
-              <Card className="h-80 md:h-72 xl:h-64">
-                <CardHeader className="pb-4 flex-row items-center gap-4">
-                  <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
-                    <FaHospital className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <CardTitle>RMCI-RHM Website</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div>
-                    It is a website commission to be designed for the Rivera
-                    Heart and Metabolism Center, an office of the Rivera Medical
-                    Center Inc.
-                    <div className="pt-2">
-                      <Link href={"https://github.com/ZaitonZz/RMCI-Website"}>
-                        <FaGithub className="size-5 lg:size-8" />
-                      </Link>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              {/* End Card */}
-              {/* Card */}
-              <Card className="h-80 md:h-72 xl:h-64">
-                <CardHeader className="pb-4 flex-row items-center gap-4">
-                  <div className="inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-2 bg-primary">
-                    <FaArchive className="flex-shrink-0 w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <CardTitle>BRMS</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div>
-                    It is a digital platform designed to streamline processes
-                    for local government units at the barangay level in the
-                    Philippines.
-                    <div className="pt-2">
-                      <Link
-                        href={"https://github.com/ZaitonZz/Group14_Capstone"}
-                      >
-                        <FaGithub className="size-5 lg:size-8" />
-                      </Link>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              {/* End Card */}
+              <CustomCardComponent card={port_1} />
+              <CustomCardComponent card={port_2} />
+              <CustomCardComponent card={port_3} />
+              <CustomCardComponent card={port_4} />
+              <CustomCardComponent card={port_5} />
+              <CustomCardComponent card={port_6} />
             </div>
           </div>
           {/* End Icon Blocks */}

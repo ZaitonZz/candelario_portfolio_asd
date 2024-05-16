@@ -1,4 +1,4 @@
-interface About {
+interface Experience {
     title:string;
     subtitle: string;
     section_one_icon: string;
@@ -7,5 +7,5 @@ interface About {
     section_two_text: string;
   }
   
-  export type { About };
+  export type { Experience };
   
