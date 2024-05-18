@@ -4,8 +4,13 @@ import Image from 'next/image'
 import { ModeToggle } from '@/components/ui/toggle-mode'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { NavBar } from '../types/api/navbar'
 
-function Nav() {
+interface NavProps{
+    navbarData:NavBar
+}
+
+const Nav: React.FC<NavProps> = ({ navbarData }) => {
   return (
     <header>
         <nav className='flex items-center'>
@@ -36,10 +41,10 @@ function Nav() {
                                 className="rounded-md w-16 lg:w-24"
                                 aria-label="Home"
                             >
-                                <Link href='http://localhost:3000/home' 
+                                <Link href={navbarData.section_one_link} 
                     className='flex place-items-center gap-2 p-4 zen_dots'
                     rel='noopener noreferrer'>
-                        Home
+                        {navbarData.section_one_text}
                     </Link>
                                 </Button>
                     
@@ -51,10 +56,10 @@ function Nav() {
                                 className="rounded-md w-16 lg:w-24"
                                 aria-label="About"
                             >
-                    <Link href='http://localhost:3000/home#secondFrameContent' 
+                    <Link href={navbarData.section_two_link} 
                     className='flex place-items-center gap-2 p-4 zen_dots'
                     rel='noopener noreferrer'>
-                        About
+                        {navbarData.section_two_text}
                     </Link>
                     </Button>
                 </li>
@@ -65,10 +70,10 @@ function Nav() {
                                 className="rounded-md w-16 lg:w-24"
                                 aria-label="Playground"
                             >
-                    <Link href='http://localhost:3000/home#thirdFrameContent' 
+                    <Link href={navbarData.section_three_link} 
                     className='flex place-items-center gap-2 p-4 zen_dots'
                     rel='noopener noreferrer'>
-                        Skills
+                        {navbarData.section_three_text}
                     </Link>
                     </Button>
                 </li>
@@ -79,10 +84,10 @@ function Nav() {
                                 className="rounded-md w-28 lg:w-36"
                                 aria-label="Playground"
                             >
-                    <Link href='http://localhost:3000/home#fourthFrameContent' 
+                    <Link href={navbarData.section_four_link}
                     className='flex place-items-center gap-2 p-4 zen_dots'
                     rel='noopener noreferrer'>
-                        Experience
+                        {navbarData.section_four_text}
                     </Link>
                     </Button>
                 </li>
@@ -93,10 +98,10 @@ function Nav() {
                                 className="rounded-md w-28 lg:w-36"
                                 aria-label="Playground"
                             >
-                    <Link href='http://localhost:3000/home#fifthFrameContent' 
+                    <Link href={navbarData.section_five_link}
                     className='flex place-items-center gap-2 p-4 zen_dots'
                     rel='noopener noreferrer'>
-                        Portfolio
+                        {navbarData.section_five_text}
                     </Link>
                     </Button>
                 </li>
@@ -110,7 +115,7 @@ function Nav() {
                     <Link href='http://127.0.0.1:8000/admin/login' 
                     className='flex place-items-center gap-2 p-4 zen_dots'
                     rel='noopener noreferrer'>
-                        Login
+                        CMS
                     </Link>
                     </Button>
                 </li>

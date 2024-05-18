@@ -32,6 +32,8 @@ import { fetchCardByTableNum } from "../util/fetch-cards";
 import { Card as CardType } from "../types/api/card";
 import { Portfolio } from "../types/api/portfolio";
 import { Experience } from "../types/api/experience";
+import { NavBar } from "../types/api/navbar";
+import { fetchNavBar } from "../util/fetch-navbar";
 
 
 async function Homepage() {
@@ -81,16 +83,17 @@ async function Homepage() {
   const skillsTable3: SubSkill[] = await fetchSkillsByTableNum(3);
   const skillsTable4: SubSkill[] = await fetchSkillsByTableNum(4);
   const skillsTable5: SubSkill[] = await fetchSkillsByTableNum(5);
-  const port_1:CardType | null = await fetchCardByTableNum(1)
-  const port_2:CardType | null = await fetchCardByTableNum(2)
-  const port_3:CardType | null = await fetchCardByTableNum(3)
-  const port_4:CardType | null = await fetchCardByTableNum(4)
-  const port_5:CardType | null = await fetchCardByTableNum(5)
-  const port_6:CardType | null = await fetchCardByTableNum(6)
+  const port_1:CardType | null = await fetchCardByTableNum(1);
+  const port_2:CardType | null = await fetchCardByTableNum(2);
+  const port_3:CardType | null = await fetchCardByTableNum(3);
+  const port_4:CardType | null = await fetchCardByTableNum(4);
+  const port_5:CardType | null = await fetchCardByTableNum(5);
+  const port_6:CardType | null = await fetchCardByTableNum(6);
+  const navbarData: NavBar = await fetchNavBar();
 
   return (
     <div className="h-screen lg:pl-12 lg:pr-12 pb-6">
-      <Nav></Nav>
+      <Nav navbarData={navbarData}></Nav>
       <ScrollToTopButton></ScrollToTopButton>
       <div className="firstFrame flex h-screen flex-wrap justify-center w-full">
         <SideBarSocials></SideBarSocials>
